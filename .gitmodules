@@ -1,0 +1,2 @@
+[submodule "sdk/libs/joengine"]
+	url = https://github.com/ringsce/ringsce.git
