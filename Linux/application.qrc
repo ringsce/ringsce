@@ -1,0 +1,30 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/copy.png</file>
+        <file>images/cut.png</file>
+        <file>images/new.png</file>
+        <file>images/open.png</file>
+        <file>images/paste.png</file>
+        <file>images/save.png</file>
+        <file>dark_theme.qml</file>
+        <file>images/linux/bash.png</file>
+        <file>images/linux/build.png</file>
+        <file>images/linux/clean.png</file>
+        <file>images/linux/copy.png</file>
+        <file>images/linux/cpp.png</file>
+        <file>images/linux/cs.png</file>
+        <file>images/linux/css.png</file>
+        <file>images/linux/cut.png</file>
+        <file>images/linux/html.png</file>
+        <file>images/linux/js-javascript.png</file>
+        <file>images/linux/new.png</file>
+        <file>images/linux/open.png</file>
+        <file>images/linux/pascal.jpeg</file>
+        <file>images/linux/paste.png</file>
+        <file>images/linux/perl.png</file>
+        <file>images/linux/php.png</file>
+        <file>images/linux/PowerShell.png</file>
+        <file>images/linux/save.png</file>
+        <file>images/linux/terminal.png</file>
+    </qresource>
+</RCC>

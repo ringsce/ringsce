@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>526</width>
+    <height>370</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>526</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuNew_Project">
+     <property name="title">
+      <string>New Project</string>
+     </property>
+     <widget class="QMenu" name="menuC_C">
+      <property name="title">
+       <string>C/C++</string>
+      </property>
+      <addaction name="actionC_Ansi_Project"/>
+      <addaction name="actionC_Ansi_Project_2"/>
+      <addaction name="actionObjective_C"/>
+      <addaction name="actionCmake"/>
+      <addaction name="actionQmake"/>
+      <addaction name="actionIrrlicht"/>
+      <addaction name="actionUrho3D"/>
+      <addaction name="actionOgre3D"/>
+      <addaction name="actionOpenGL"/>
+      <addaction name="actionVulkan"/>
+      <addaction name="actionAmiga_OS_3_x_4_x"/>
+     </widget>
+     <widget class="QMenu" name="menuJava">
+      <property name="title">
+       <string>Java</string>
+      </property>
+      <addaction name="separator"/>
+      <addaction name="actionJava_2"/>
+      <addaction name="actionJava_EE"/>
+      <addaction name="actionJava_JBoss"/>
+      <addaction name="actionAndroid"/>
+      <addaction name="actionAnt"/>
+      <addaction name="actionGradle"/>
+      <addaction name="actionMaven"/>
+     </widget>
+     <widget class="QMenu" name="menuForth">
+      <property name="title">
+       <string>Forth</string>
+      </property>
+      <addaction name="actionForth_Project"/>
+     </widget>
+     <widget class="QMenu" name="menuPascal">
+      <property name="title">
+       <string>Pascal</string>
+      </property>
+      <addaction name="actionDelphi_Project"/>
+      <addaction name="actionPascal_Project"/>
+     </widget>
+     <widget class="QMenu" name="menuAda">
+      <property name="title">
+       <string>Ada</string>
+      </property>
+      <addaction name="actionAda_Project"/>
+     </widget>
+     <widget class="QMenu" name="menuWeb">
+      <property name="title">
+       <string>Web</string>
+      </property>
+      <widget class="QMenu" name="menuPython">
+       <property name="title">
+        <string>Python</string>
+       </property>
+       <addaction name="actionDjango"/>
+       <addaction name="actionFlask"/>
+      </widget>
+      <addaction name="actionHTML"/>
+      <addaction name="actionCSS"/>
+      <addaction name="actionJavascript"/>
+      <addaction name="actionNodeJS"/>
+      <addaction name="actionAngular"/>
+      <addaction name="actionReact"/>
+      <addaction name="actionDart"/>
+      <addaction name="actionPHP"/>
+      <addaction name="actionPerl"/>
+      <addaction name="menuPython"/>
+     </widget>
+     <widget class="QMenu" name="menuC">
+      <property name="title">
+       <string>C#</string>
+      </property>
+      <addaction name="actionC_Console"/>
+      <addaction name="actionC_WPF"/>
+      <addaction name="actionC_Mono"/>
+      <addaction name="actionC_Mono_Game"/>
+      <addaction name="actionC_Cocos_2d"/>
+      <addaction name="actionC_Unity"/>
+      <addaction name="actionC_Xamarin"/>
+      <addaction name="actionC_XBOX_Dev"/>
+     </widget>
+     <widget class="QMenu" name="menuLua">
+      <property name="title">
+       <string>Lua</string>
+      </property>
+      <addaction name="actionLua_Project"/>
+      <addaction name="actionLua_Love_Project"/>
+      <addaction name="actionLua_Gaming_Project"/>
+     </widget>
+     <widget class="QMenu" name="menuPython_2">
+      <property name="title">
+       <string>Python</string>
+      </property>
+      <addaction name="actionPython_Console"/>
+      <addaction name="actionPython_QT"/>
+      <addaction name="actionPython_Tkinter"/>
+      <addaction name="actionPython_GTK"/>
+     </widget>
+     <addaction name="separator"/>
+     <addaction name="menuC_C"/>
+     <addaction name="menuJava"/>
+     <addaction name="menuForth"/>
+     <addaction name="menuPascal"/>
+     <addaction name="menuAda"/>
+     <addaction name="menuWeb"/>
+     <addaction name="menuC"/>
+     <addaction name="menuLua"/>
+     <addaction name="menuPython_2"/>
+     <addaction name="actionBash"/>
+     <addaction name="actionPerl_2"/>
+     <addaction name="actionPowershell"/>
+    </widget>
+    <addaction name="menuNew_Project"/>
+    <addaction name="actionNew_File"/>
+    <addaction name="actionSettings"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_All"/>
+    <addaction name="actionPrint"/>
+    <addaction name="actionPrint_Preview"/>
+    <addaction name="action_Quit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuBuild">
+    <property name="title">
+     <string>Build</string>
+    </property>
+    <addaction name="actionBuild_All"/>
+    <addaction name="actionBuild"/>
+    <addaction name="actionClean"/>
+    <addaction name="actionClean_All"/>
+    <addaction name="actionRebuild"/>
+   </widget>
+   <widget class="QMenu" name="menuAnalyze">
+    <property name="title">
+     <string>Analyze</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuBuild"/>
+   <addaction name="menuAnalyze"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuWindow"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNew_File">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>New File</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_All">
+   <property name="text">
+    <string>Save All</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+A</string>
+   </property>
+  </action>
+  <action name="actionPrint">
+   <property name="text">
+    <string>Print</string>
+   </property>
+  </action>
+  <action name="actionPrint_Preview">
+   <property name="text">
+    <string>Print Preview</string>
+   </property>
+  </action>
+  <action name="action_Quit">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionC_Ansi_Project">
+   <property name="text">
+    <string>C Ansi Project</string>
+   </property>
+  </action>
+  <action name="actionC_Ansi_Project_2">
+   <property name="text">
+    <string>C++ Ansi Project</string>
+   </property>
+  </action>
+  <action name="actionCmake">
+   <property name="text">
+    <string>Cmake</string>
+   </property>
+  </action>
+  <action name="actionQmake">
+   <property name="text">
+    <string>Qmake</string>
+   </property>
+  </action>
+  <action name="actionIrrlicht">
+   <property name="text">
+    <string>Irrlicht</string>
+   </property>
+  </action>
+  <action name="actionUrho3D">
+   <property name="text">
+    <string>Urho3D</string>
+   </property>
+  </action>
+  <action name="actionOgre3D">
+   <property name="text">
+    <string>Ogre3D</string>
+   </property>
+  </action>
+  <action name="actionOpenGL">
+   <property name="text">
+    <string>OpenGL</string>
+   </property>
+  </action>
+  <action name="actionVulkan">
+   <property name="text">
+    <string>Vulkan</string>
+   </property>
+  </action>
+  <action name="actionJava_2">
+   <property name="text">
+    <string>Java </string>
+   </property>
+  </action>
+  <action name="actionJava_EE">
+   <property name="text">
+    <string>Java EE</string>
+   </property>
+  </action>
+  <action name="actionJava_JBoss">
+   <property name="text">
+    <string>Java JBoss</string>
+   </property>
+  </action>
+  <action name="actionAndroid">
+   <property name="text">
+    <string>Android</string>
+   </property>
+  </action>
+  <action name="actionAnt">
+   <property name="text">
+    <string>Ant</string>
+   </property>
+  </action>
+  <action name="actionGradle">
+   <property name="text">
+    <string>Gradle</string>
+   </property>
+  </action>
+  <action name="actionMaven">
+   <property name="text">
+    <string>Maven</string>
+   </property>
+  </action>
+  <action name="actionForth_Project">
+   <property name="text">
+    <string>Forth Project</string>
+   </property>
+  </action>
+  <action name="actionDelphi_Project">
+   <property name="text">
+    <string>Delphi Project</string>
+   </property>
+  </action>
+  <action name="actionPascal_Project">
+   <property name="text">
+    <string>Pascal Project</string>
+   </property>
+  </action>
+  <action name="actionObjective_C">
+   <property name="text">
+    <string>Objective-C </string>
+   </property>
+  </action>
+  <action name="actionAda_Project">
+   <property name="text">
+    <string>Ada Project</string>
+   </property>
+  </action>
+  <action name="actionHTML">
+   <property name="text">
+    <string>HTML</string>
+   </property>
+  </action>
+  <action name="actionCSS">
+   <property name="text">
+    <string>CSS</string>
+   </property>
+  </action>
+  <action name="actionJavascript">
+   <property name="text">
+    <string>Javascript</string>
+   </property>
+  </action>
+  <action name="actionNodeJS">
+   <property name="text">
+    <string>NodeJS</string>
+   </property>
+  </action>
+  <action name="actionAngular">
+   <property name="text">
+    <string>Angular</string>
+   </property>
+  </action>
+  <action name="actionReact">
+   <property name="text">
+    <string>React</string>
+   </property>
+  </action>
+  <action name="actionDart">
+   <property name="text">
+    <string>Dart</string>
+   </property>
+  </action>
+  <action name="actionPHP">
+   <property name="text">
+    <string>PHP</string>
+   </property>
+  </action>
+  <action name="actionPerl">
+   <property name="text">
+    <string>Perl</string>
+   </property>
+  </action>
+  <action name="actionDjango">
+   <property name="text">
+    <string>Django</string>
+   </property>
+  </action>
+  <action name="actionFlask">
+   <property name="text">
+    <string>Flask</string>
+   </property>
+  </action>
+  <action name="actionC_Console">
+   <property name="text">
+    <string>C# Console</string>
+   </property>
+  </action>
+  <action name="actionC_WPF">
+   <property name="text">
+    <string>C# WPF</string>
+   </property>
+  </action>
+  <action name="actionC_Mono">
+   <property name="text">
+    <string>C# Mono</string>
+   </property>
+  </action>
+  <action name="actionC_Mono_Game">
+   <property name="text">
+    <string>C# Mono Game</string>
+   </property>
+  </action>
+  <action name="actionC_Cocos_2d">
+   <property name="text">
+    <string>C# Cocos 2d</string>
+   </property>
+  </action>
+  <action name="actionC_Unity">
+   <property name="text">
+    <string>C# Unity</string>
+   </property>
+  </action>
+  <action name="actionC_Xamarin">
+   <property name="text">
+    <string>C# Xamarin</string>
+   </property>
+  </action>
+  <action name="actionC_XBOX_Dev">
+   <property name="text">
+    <string>C# XBOX Dev</string>
+   </property>
+  </action>
+  <action name="actionLua_Project">
+   <property name="text">
+    <string>Lua Project</string>
+   </property>
+  </action>
+  <action name="actionLua_Love_Project">
+   <property name="text">
+    <string>Lua Love Project</string>
+   </property>
+  </action>
+  <action name="actionLua_Gaming_Project">
+   <property name="text">
+    <string>Lua Gaming Project</string>
+   </property>
+  </action>
+  <action name="actionPython_Console">
+   <property name="text">
+    <string>Python Console</string>
+   </property>
+  </action>
+  <action name="actionPython_QT">
+   <property name="text">
+    <string>Python QT</string>
+   </property>
+  </action>
+  <action name="actionPython_Tkinter">
+   <property name="text">
+    <string>Python Tkinter</string>
+   </property>
+  </action>
+  <action name="actionPython_GTK">
+   <property name="text">
+    <string>Python GTK+</string>
+   </property>
+  </action>
+  <action name="actionBash">
+   <property name="text">
+    <string>Bash</string>
+   </property>
+  </action>
+  <action name="actionPerl_2">
+   <property name="text">
+    <string>Perl</string>
+   </property>
+  </action>
+  <action name="actionPowershell">
+   <property name="text">
+    <string>Powershell</string>
+   </property>
+  </action>
+  <action name="actionBuild_All">
+   <property name="text">
+    <string>Build All</string>
+   </property>
+  </action>
+  <action name="actionBuild">
+   <property name="text">
+    <string>Build</string>
+   </property>
+  </action>
+  <action name="actionClean">
+   <property name="text">
+    <string>Clean</string>
+   </property>
+  </action>
+  <action name="actionClean_All">
+   <property name="text">
+    <string>Clean All</string>
+   </property>
+  </action>
+  <action name="actionRebuild">
+   <property name="text">
+    <string>Rebuild</string>
+   </property>
+  </action>
+  <action name="actionAmiga_OS_3_x_4_x">
+   <property name="text">
+    <string>Amiga OS 3.x / 4.x</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
