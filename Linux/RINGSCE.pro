@@ -1,5 +1,4 @@
-QT += gui widgets
-QT += qml quick sql
+QT += gui widgets sql
 CONFIG += c++11
 requires(qtConfig(filedialog))
 
@@ -14,7 +13,13 @@ HEADERS       = \
     dialog.h \
     mainwindow.h \
     sqlcontactmodel.h \
-    sqlconversationmodel.h
+    sqlconversationmodel.h \
+    ui_main.h \
+    ui_new_file.h \
+    ui_new_project.h \
+    main.h \
+    new_file.h \
+    new_project.h
 
 SOURCES       = main.cpp \
     highlighter.cpp \
