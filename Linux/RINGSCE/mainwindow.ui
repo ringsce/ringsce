@@ -1,24 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuPreferences">
+     <property name="title">
+      <string>Preferences</string>
+     </property>
+     <addaction name="actionSettings"/>
+     <addaction name="actionCompilers"/>
+    </widget>
+    <addaction name="actionNewProject"/>
+    <addaction name="actionNewFile"/>
+    <addaction name="actionEdit"/>
+    <addaction name="menuPreferences"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="actionSaveAll"/>
+    <addaction name="actionClose"/>
+    <addaction name="actionCloseAll"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+    <addaction name="actionSelect"/>
+    <addaction name="actionSelectAll"/>
+    <addaction name="actionFind"/>
+    <addaction name="actionFindReplace"/>
+    <addaction name="actionSearch"/>
+   </widget>
+   <widget class="QMenu" name="menuBuild">
+    <property name="title">
+     <string>Build</string>
+    </property>
+    <addaction name="actionBuild"/>
+    <addaction name="actionBuildAll"/>
+    <addaction name="actionClean"/>
+    <addaction name="actionCleanAll"/>
+    <addaction name="actionRun"/>
+    <addaction name="actionRunWithoutDeployment"/>
+   </widget>
+   <widget class="QMenu" name="menuAnalyze">
+    <property name="title">
+     <string>Analyze</string>
+    </property>
+    <addaction name="actionCLang"/>
+    <addaction name="actionGDB_2"/>
+   </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <widget class="QMenu" name="menuDebug_2">
+     <property name="title">
+      <string>Debug</string>
+     </property>
+     <addaction name="actionDeploy"/>
+     <addaction name="actionDepoyWithoutDebugging"/>
+    </widget>
+    <addaction name="menuDebug_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionUpdate"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionCompilers_2"/>
+    <addaction name="actionSdks"/>
+    <addaction name="actionIncludes"/>
+    <addaction name="actionPlugins"/>
+    <addaction name="actionAddIns"/>
+   </widget>
+   <widget class="QMenu" name="menuTeam">
+    <property name="title">
+     <string>Team</string>
+    </property>
+    <addaction name="actionChat"/>
+    <addaction name="actionCVS"/>
+    <addaction name="actionGithub"/>
+    <addaction name="actionSubversion"/>
+    <addaction name="actionMercurial"/>
+    <addaction name="actionBazaar"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuBuild"/>
+   <addaction name="menuAnalyze"/>
+   <addaction name="menuDebug"/>
+   <addaction name="menuTeam"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNewProject">
+   <property name="text">
+    <string>New Project</string>
+   </property>
+  </action>
+  <action name="actionNewFile">
+   <property name="text">
+    <string>New File</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionSaveAll">
+   <property name="text">
+    <string>Save All</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </action>
+  <action name="actionCloseAll">
+   <property name="text">
+    <string>Close All</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionBuild">
+   <property name="text">
+    <string>Build</string>
+   </property>
+  </action>
+  <action name="actionBuildAll">
+   <property name="text">
+    <string>Build All</string>
+   </property>
+  </action>
+  <action name="actionClean">
+   <property name="text">
+    <string>Clean</string>
+   </property>
+  </action>
+  <action name="actionCleanAll">
+   <property name="text">
+    <string>Clean All</string>
+   </property>
+  </action>
+  <action name="actionCLang">
+   <property name="text">
+    <string>CLang</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionCompilers">
+   <property name="text">
+    <string>Compilers</string>
+   </property>
+  </action>
+  <action name="actionUpdate">
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionCVS">
+   <property name="text">
+    <string>CVS</string>
+   </property>
+  </action>
+  <action name="actionChat">
+   <property name="text">
+    <string>Team Chat</string>
+   </property>
+  </action>
+  <action name="actionGithub">
+   <property name="text">
+    <string>Github</string>
+   </property>
+  </action>
+  <action name="actionSubversion">
+   <property name="text">
+    <string>Subversion</string>
+   </property>
+  </action>
+  <action name="actionMercurial">
+   <property name="text">
+    <string>Mercurial</string>
+   </property>
+  </action>
+  <action name="actionBazaar">
+   <property name="text">
+    <string>Bazaar</string>
+   </property>
+  </action>
+  <action name="actionCompilers_2">
+   <property name="text">
+    <string>Compilers</string>
+   </property>
+  </action>
+  <action name="actionSdks">
+   <property name="text">
+    <string>Sdks</string>
+   </property>
+  </action>
+  <action name="actionIncludes">
+   <property name="text">
+    <string>Includes</string>
+   </property>
+  </action>
+  <action name="actionPlugins">
+   <property name="text">
+    <string>Plugins</string>
+   </property>
+  </action>
+  <action name="actionAddIns">
+   <property name="text">
+    <string>Add-Ins</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="text">
+    <string>Cut</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="text">
+    <string>Paste</string>
+   </property>
+  </action>
+  <action name="actionSelect">
+   <property name="text">
+    <string>Select</string>
+   </property>
+  </action>
+  <action name="actionSelectAll">
+   <property name="text">
+    <string>Select All</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find </string>
+   </property>
+  </action>
+  <action name="actionFindReplace">
+   <property name="text">
+    <string>Find &amp; Replace</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="text">
+    <string>Search</string>
+   </property>
+  </action>
+  <action name="actionGDB_2">
+   <property name="text">
+    <string>GDB</string>
+   </property>
+  </action>
+  <action name="actionDeploy">
+   <property name="text">
+    <string>Deploy</string>
+   </property>
+  </action>
+  <action name="actionDepoyWithoutDebugging">
+   <property name="text">
+    <string>Depoy without Debugging</string>
+   </property>
+  </action>
+  <action name="actionRun">
+   <property name="text">
+    <string>Run</string>
+   </property>
+  </action>
+  <action name="actionRunWithoutDeployment">
+   <property name="text">
+    <string>Run without Deployment</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>
