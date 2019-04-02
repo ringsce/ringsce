@@ -123,6 +123,18 @@ int main(int argc, char *argv[])
     wizard.setWindowTitle("RINGSCE Wizard");
     wizard.show();
 
+    QFile f(":qdarkstyle/style.qss");
+    if (!f.exists())
+    {
+        printf("Unable to set stylesheet, file not found\n");
+    }
+    else
+    {
+        f.open(QFile::ReadOnly | QFile::Text);
+        QTextStream ts(&f);
+        qApp->setStyleSheet(ts.readAll());
+    }
+
 
 
     w.show();

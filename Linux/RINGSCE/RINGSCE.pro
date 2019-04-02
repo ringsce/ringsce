@@ -27,7 +27,6 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     highlighter.cpp \
-    new_project.cpp \
     new_file.cpp \
     settings.cpp \
     about.cpp \
@@ -39,3 +38,5 @@ HEADERS += \
 
 FORMS += \
         mainwindow.ui
+
+RESOURCES += qdarkstyle/style.qrc

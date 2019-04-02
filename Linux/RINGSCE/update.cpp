@@ -1,5 +1,13 @@
+#include <QDesktopWidget>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QTranslator>
+#include <QLocale>
+#include <QLibraryInfo>
+#include <QtWidgets>
+
 //Create Wizard
-QWizardPage *createIntroPage()
+QWizardPage *createIntroUpdatePage()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Introduction");
@@ -16,7 +24,7 @@ QWizardPage *createIntroPage()
 }
 
 // createSetupPage
-QWizardPage *createSetupPage()
+QWizardPage *createSetupUpdatePage()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Setup");
@@ -39,7 +47,7 @@ QWizardPage *createSetupPage()
 }
 
 // createRegistrationPage
-QWizardPage *createRegistrationPage()
+QWizardPage *createRegistrationUpdatePage()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Registration");
@@ -63,7 +71,7 @@ QWizardPage *createRegistrationPage()
 
 
 // createConclusionPage
-QWizardPage *createConclusionPage()
+QWizardPage *createConclusionUpdatePage()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Conclusion");

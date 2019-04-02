@@ -52,11 +52,21 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../RINGSCE/main.cpp \
 		../RINGSCE/mainwindow.cpp \
-		../RINGSCE/highlighter.cpp moc_mainwindow.cpp \
+		../RINGSCE/highlighter.cpp \
+		../RINGSCE/new_file.cpp \
+		../RINGSCE/settings.cpp \
+		../RINGSCE/about.cpp \
+		../RINGSCE/update.cpp qrc_style.cpp \
+		moc_mainwindow.cpp \
 		moc_highlighter.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		highlighter.o \
+		new_file.o \
+		settings.o \
+		about.o \
+		update.o \
+		qrc_style.o \
 		moc_mainwindow.o \
 		moc_highlighter.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -112,6 +122,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		../RINGSCE/.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -134,7 +145,11 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../RINGSCE/RINGSCE.pro ../RINGSCE/mainwindow.h \
 		../RINGSCE/highlighter.h ../RINGSCE/main.cpp \
 		../RINGSCE/mainwindow.cpp \
-		../RINGSCE/highlighter.cpp
+		../RINGSCE/highlighter.cpp \
+		../RINGSCE/new_file.cpp \
+		../RINGSCE/settings.cpp \
+		../RINGSCE/about.cpp \
+		../RINGSCE/update.cpp
 QMAKE_TARGET  = RINGSCE
 DESTDIR       = 
 TARGET        = RINGSCE
@@ -199,6 +214,7 @@ Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-cla
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -219,6 +235,7 @@ Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-cla
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../RINGSCE/RINGSCE.pro \
+		../RINGSCE/qdarkstyle/style.qrc \
 		/usr/lib/x86_64-linux-gnu/libQt5Widgets.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Gui.prl \
 		/usr/lib/x86_64-linux-gnu/libQt5Core.prl
@@ -276,6 +293,7 @@ Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-cla
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -296,6 +314,7 @@ Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-cla
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 ../RINGSCE/RINGSCE.pro:
+../RINGSCE/qdarkstyle/style.qrc:
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Gui.prl:
 /usr/lib/x86_64-linux-gnu/libQt5Core.prl:
@@ -313,9 +332,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/qdarkstyle/style.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui $(DISTDIR)/
 
 
@@ -340,8 +360,53 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_style.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_style.cpp
+qrc_style.cpp: ../RINGSCE/qdarkstyle/style.qrc \
+		/usr/lib/qt5/bin/rcc \
+		../RINGSCE/qdarkstyle/rc/Vsepartoolbar.png \
+		../RINGSCE/qdarkstyle/rc/close-pressed.png \
+		../RINGSCE/qdarkstyle/rc/Hmovetoolbar.png \
+		../RINGSCE/qdarkstyle/rc/up_arrow.png \
+		../RINGSCE/qdarkstyle/rc/left_arrow_disabled.png \
+		../RINGSCE/qdarkstyle/rc/close-hover.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_unchecked.png \
+		../RINGSCE/qdarkstyle/rc/radio_unchecked_disabled.png \
+		../RINGSCE/qdarkstyle/rc/radio_checked.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_checked_disabled.png \
+		../RINGSCE/qdarkstyle/rc/Hsepartoolbar.png \
+		../RINGSCE/qdarkstyle/rc/sizegrip.png \
+		../RINGSCE/qdarkstyle/rc/down_arrow.png \
+		../RINGSCE/qdarkstyle/rc/stylesheet-branch-more.png \
+		../RINGSCE/qdarkstyle/rc/radio_unchecked.png \
+		../RINGSCE/qdarkstyle/rc/branch_closed-on.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_unchecked_disabled.png \
+		../RINGSCE/qdarkstyle/rc/branch_open.png \
+		../RINGSCE/qdarkstyle/rc/left_arrow.png \
+		../RINGSCE/qdarkstyle/rc/stylesheet-branch-end.png \
+		../RINGSCE/qdarkstyle/rc/undock.png \
+		../RINGSCE/qdarkstyle/rc/right_arrow.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_indeterminate.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_checked_focus.png \
+		../RINGSCE/qdarkstyle/rc/stylesheet-vline.png \
+		../RINGSCE/qdarkstyle/rc/radio_checked_focus.png \
+		../RINGSCE/qdarkstyle/rc/branch_closed.png \
+		../RINGSCE/qdarkstyle/rc/right_arrow_disabled.png \
+		../RINGSCE/qdarkstyle/rc/down_arrow_disabled.png \
+		../RINGSCE/qdarkstyle/rc/branch_open-on.png \
+		../RINGSCE/qdarkstyle/rc/radio_unchecked_focus.png \
+		../RINGSCE/qdarkstyle/rc/Vmovetoolbar.png \
+		../RINGSCE/qdarkstyle/rc/transparent.png \
+		../RINGSCE/qdarkstyle/rc/close.png \
+		../RINGSCE/qdarkstyle/rc/radio_checked_disabled.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_checked.png \
+		../RINGSCE/qdarkstyle/rc/up_arrow_disabled.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_indeterminate_focus.png \
+		../RINGSCE/qdarkstyle/rc/checkbox_unchecked_focus.png \
+		../RINGSCE/qdarkstyle/style.qss
+	/usr/lib/qt5/bin/rcc -name style ../RINGSCE/qdarkstyle/style.qrc -o qrc_style.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -376,7 +441,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -390,6 +455,21 @@ mainwindow.o: ../RINGSCE/mainwindow.cpp ../RINGSCE/mainwindow.h \
 
 highlighter.o: ../RINGSCE/highlighter.cpp ../RINGSCE/highlighter.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o highlighter.o ../RINGSCE/highlighter.cpp
+
+new_file.o: ../RINGSCE/new_file.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_file.o ../RINGSCE/new_file.cpp
+
+settings.o: ../RINGSCE/settings.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o settings.o ../RINGSCE/settings.cpp
+
+about.o: ../RINGSCE/about.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o about.o ../RINGSCE/about.cpp
+
+update.o: ../RINGSCE/update.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o update.o ../RINGSCE/update.cpp
+
+qrc_style.o: qrc_style.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_style.o qrc_style.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
