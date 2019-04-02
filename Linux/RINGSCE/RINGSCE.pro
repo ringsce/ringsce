@@ -30,13 +30,17 @@ SOURCES += \
     new_file.cpp \
     settings.cpp \
     about.cpp \
-    update.cpp
+    update.cpp \
+    new_project.cpp
 
 HEADERS += \
         mainwindow.h \
     highlighter.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    new_file.ui \
+    new_project.ui \
+    below_stack.ui
 
 RESOURCES += qdarkstyle/style.qrc

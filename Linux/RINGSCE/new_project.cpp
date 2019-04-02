@@ -1,6 +1,3 @@
-#include "mainwindow.h"
-#include <QApplication>
-#include "highlighter.h"
 #include <QDesktopWidget>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
@@ -8,10 +5,8 @@
 #include <QLocale>
 #include <QLibraryInfo>
 #include <QtWidgets>
-#include <QPushButton>
-
 //Create Wizard
-QWizardPage *createIntroPage()
+QWizardPage *createNewProjectPage()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Introduction");
@@ -28,7 +23,7 @@ QWizardPage *createIntroPage()
 }
 
 // createSetupPage
-QWizardPage *createSetupPage()
+QWizardPage *createNewProjectSetup()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Setup");
@@ -51,7 +46,7 @@ QWizardPage *createSetupPage()
 }
 
 // createRegistrationPage
-QWizardPage *createRegistrationPage()
+QWizardPage *createNewProjectRegistration()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Registration");
@@ -75,7 +70,7 @@ QWizardPage *createRegistrationPage()
 
 
 // createConclusionPage
-QWizardPage *createConclusionPage()
+QWizardPage *createNewProjectExtension()
 {
     QWizardPage *page = new QWizardPage;
     page->setTitle("Conclusion");
@@ -89,56 +84,4 @@ QWizardPage *createConclusionPage()
     page->setLayout(layout);
 
     return page;
-}
-
-// Main Function
-int main(int argc, char *argv[])
-{
-    QApplication app(argc, argv);
-    MainWindow w;
-    QCoreApplication::setOrganizationName("Kreatyve Project");
-    QCoreApplication::setApplicationName("RINGSCEIDE");
-    QCoreApplication::setApplicationVersion(QT_VERSION_STR);
-    QCommandLineParser parser;
-    parser.setApplicationDescription(QCoreApplication::applicationName());
-    parser.addHelpOption();
-    parser.addVersionOption();
-    parser.addPositionalArgument("file", "The file to open.");
-    parser.process(app);
-
-
-#ifndef QT_NO_TRANSLATION
-    QString translatorFileName = QLatin1String("qt_");
-    translatorFileName += QLocale::system().name();
-    QTranslator *translator = new QTranslator(&app);
-    if (translator->load(translatorFileName, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
-        app.installTranslator(translator);
-#endif
-
-    QWizard wizard;
-    wizard.addPage(createIntroPage());
-    wizard.addPage(createSetupPage());
-    wizard.addPage(createRegistrationPage());
-    wizard.addPage(createConclusionPage());
-
-    wizard.setWindowTitle("RINGSCE Wizard");
-    wizard.show();
-
-    QFile f(":qdarkstyle/style.qss");
-    if (!f.exists())
-    {
-        printf("Unable to set stylesheet, file not found\n");
-    }
-    else
-    {
-        f.open(QFile::ReadOnly | QFile::Text);
-        QTextStream ts(&f);
-        qApp->setStyleSheet(ts.readAll());
-    }
-
-
-
-    w.show();
-
-    return app.exec();
 }

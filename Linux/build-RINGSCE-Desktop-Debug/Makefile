@@ -56,7 +56,8 @@ SOURCES       = ../RINGSCE/main.cpp \
 		../RINGSCE/new_file.cpp \
 		../RINGSCE/settings.cpp \
 		../RINGSCE/about.cpp \
-		../RINGSCE/update.cpp qrc_style.cpp \
+		../RINGSCE/update.cpp \
+		../RINGSCE/new_project.cpp qrc_style.cpp \
 		moc_mainwindow.cpp \
 		moc_highlighter.cpp
 OBJECTS       = main.o \
@@ -66,6 +67,7 @@ OBJECTS       = main.o \
 		settings.o \
 		about.o \
 		update.o \
+		new_project.o \
 		qrc_style.o \
 		moc_mainwindow.o \
 		moc_highlighter.o
@@ -149,7 +151,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../RINGSCE/new_file.cpp \
 		../RINGSCE/settings.cpp \
 		../RINGSCE/about.cpp \
-		../RINGSCE/update.cpp
+		../RINGSCE/update.cpp \
+		../RINGSCE/new_project.cpp
 QMAKE_TARGET  = RINGSCE
 DESTDIR       = 
 TARGET        = RINGSCE
@@ -158,7 +161,7 @@ TARGET        = RINGSCE
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_new_file.h ui_new_project.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -335,8 +338,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../RINGSCE/qdarkstyle/style.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp ../RINGSCE/new_project.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui ../RINGSCE/new_file.ui ../RINGSCE/new_project.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -428,12 +431,20 @@ moc_highlighter.cpp: ../RINGSCE/highlighter.h \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_make_all: ui_mainwindow.h ui_new_file.h ui_new_project.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h
+	-$(DEL_FILE) ui_mainwindow.h ui_new_file.h ui_new_project.h
 ui_mainwindow.h: ../RINGSCE/mainwindow.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../RINGSCE/mainwindow.ui -o ui_mainwindow.h
+
+ui_new_file.h: ../RINGSCE/new_file.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../RINGSCE/new_file.ui -o ui_new_file.h
+
+ui_new_project.h: ../RINGSCE/new_project.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../RINGSCE/new_project.ui -o ui_new_project.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -467,6 +478,9 @@ about.o: ../RINGSCE/about.cpp
 
 update.o: ../RINGSCE/update.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o update.o ../RINGSCE/update.cpp
+
+new_project.o: ../RINGSCE/new_project.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_project.o ../RINGSCE/new_project.cpp
 
 qrc_style.o: qrc_style.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_style.o qrc_style.cpp
