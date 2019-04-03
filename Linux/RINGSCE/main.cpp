@@ -9,6 +9,7 @@
 #include <QLibraryInfo>
 #include <QtWidgets>
 #include <QPushButton>
+#include "splashscreen.h"
 
 //Create Wizard
 QWizardPage *createIntroPage()
@@ -124,6 +125,11 @@ int main(int argc, char *argv[])
     wizard.setWindowTitle("RINGSCE Wizard");
     wizard.show();
 
+    QPixmap pixmap("RINGSCE_v2.png");
+    QSplashScreen splash(pixmap);
+    splash.show();
+
+
     QFile f(":qdarkstyle/style.qss");
     if (!f.exists())
     {
@@ -135,6 +141,11 @@ int main(int argc, char *argv[])
         QTextStream ts(&f);
         qApp->setStyleSheet(ts.readAll());
     }
+
+    I::sleep(20); // splash is shown for 5 seconds
+
+    w.showMaximized();
+    splash.finish(&w);
 
 
 

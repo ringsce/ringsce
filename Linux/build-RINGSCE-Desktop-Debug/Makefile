@@ -57,7 +57,8 @@ SOURCES       = ../RINGSCE/main.cpp \
 		../RINGSCE/settings.cpp \
 		../RINGSCE/about.cpp \
 		../RINGSCE/update.cpp \
-		../RINGSCE/new_project.cpp qrc_style.cpp \
+		../RINGSCE/new_project.cpp \
+		../RINGSCE/splashscreen.cpp qrc_style.cpp \
 		moc_mainwindow.cpp \
 		moc_highlighter.cpp
 OBJECTS       = main.o \
@@ -68,10 +69,12 @@ OBJECTS       = main.o \
 		about.o \
 		update.o \
 		new_project.o \
+		splashscreen.o \
 		qrc_style.o \
 		moc_mainwindow.o \
 		moc_highlighter.o
-DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
+DIST          = ../RINGSCE/RINGSCE_v2.png \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/sanitize.conf \
@@ -145,14 +148,16 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../RINGSCE/RINGSCE.pro ../RINGSCE/mainwindow.h \
-		../RINGSCE/highlighter.h ../RINGSCE/main.cpp \
+		../RINGSCE/highlighter.h \
+		../RINGSCE/splashscreen.h ../RINGSCE/main.cpp \
 		../RINGSCE/mainwindow.cpp \
 		../RINGSCE/highlighter.cpp \
 		../RINGSCE/new_file.cpp \
 		../RINGSCE/settings.cpp \
 		../RINGSCE/about.cpp \
 		../RINGSCE/update.cpp \
-		../RINGSCE/new_project.cpp
+		../RINGSCE/new_project.cpp \
+		../RINGSCE/splashscreen.cpp
 QMAKE_TARGET  = RINGSCE
 DESTDIR       = 
 TARGET        = RINGSCE
@@ -161,7 +166,7 @@ TARGET        = RINGSCE
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h ui_new_file.h ui_new_project.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h ui_new_file.h ui_new_project.h ui_below_stack.h $(OBJECTS)  
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: ../RINGSCE/RINGSCE.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-clang/qmake.conf /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -337,9 +342,9 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/qdarkstyle/style.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp ../RINGSCE/new_project.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui ../RINGSCE/new_file.ui ../RINGSCE/new_project.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h ../RINGSCE/splashscreen.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp ../RINGSCE/new_project.cpp ../RINGSCE/splashscreen.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui ../RINGSCE/new_file.ui ../RINGSCE/new_project.ui ../RINGSCE/below_stack.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -368,6 +373,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_style.cpp
 qrc_style.cpp: ../RINGSCE/qdarkstyle/style.qrc \
 		/usr/lib/qt5/bin/rcc \
+		../../RINGSCE_v2.png \
 		../RINGSCE/qdarkstyle/rc/Vsepartoolbar.png \
 		../RINGSCE/qdarkstyle/rc/close-pressed.png \
 		../RINGSCE/qdarkstyle/rc/Hmovetoolbar.png \
@@ -431,9 +437,9 @@ moc_highlighter.cpp: ../RINGSCE/highlighter.h \
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_mainwindow.h ui_new_file.h ui_new_project.h
+compiler_uic_make_all: ui_mainwindow.h ui_new_file.h ui_new_project.h ui_below_stack.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_mainwindow.h ui_new_file.h ui_new_project.h
+	-$(DEL_FILE) ui_mainwindow.h ui_new_file.h ui_new_project.h ui_below_stack.h
 ui_mainwindow.h: ../RINGSCE/mainwindow.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../RINGSCE/mainwindow.ui -o ui_mainwindow.h
@@ -446,6 +452,10 @@ ui_new_project.h: ../RINGSCE/new_project.ui \
 		/usr/lib/qt5/bin/uic
 	/usr/lib/qt5/bin/uic ../RINGSCE/new_project.ui -o ui_new_project.h
 
+ui_below_stack.h: ../RINGSCE/below_stack.ui \
+		/usr/lib/qt5/bin/uic
+	/usr/lib/qt5/bin/uic ../RINGSCE/below_stack.ui -o ui_below_stack.h
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -457,7 +467,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 ####### Compile
 
 main.o: ../RINGSCE/main.cpp ../RINGSCE/mainwindow.h \
-		../RINGSCE/highlighter.h
+		../RINGSCE/highlighter.h \
+		../RINGSCE/splashscreen.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../RINGSCE/main.cpp
 
 mainwindow.o: ../RINGSCE/mainwindow.cpp ../RINGSCE/mainwindow.h \
@@ -481,6 +492,9 @@ update.o: ../RINGSCE/update.cpp
 
 new_project.o: ../RINGSCE/new_project.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o new_project.o ../RINGSCE/new_project.cpp
+
+splashscreen.o: ../RINGSCE/splashscreen.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o splashscreen.o ../RINGSCE/splashscreen.cpp
 
 qrc_style.o: qrc_style.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_style.o qrc_style.cpp

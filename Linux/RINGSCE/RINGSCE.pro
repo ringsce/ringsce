@@ -31,11 +31,13 @@ SOURCES += \
     settings.cpp \
     about.cpp \
     update.cpp \
-    new_project.cpp
+    new_project.cpp \
+    splashscreen.cpp
 
 HEADERS += \
         mainwindow.h \
-    highlighter.h
+    highlighter.h \
+    splashscreen.h
 
 FORMS += \
         mainwindow.ui \
@@ -44,3 +46,6 @@ FORMS += \
     below_stack.ui
 
 RESOURCES += qdarkstyle/style.qrc
+
+DISTFILES += \
+    RINGSCE_v2.png
