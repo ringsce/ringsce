@@ -10,6 +10,8 @@
 #include <QtWidgets>
 #include <QPushButton>
 #include "splashscreen.h"
+#include "ui_new_file.h"
+#include "ui_new_project.h"
 
 //Create Wizard
 QWizardPage *createIntroPage()

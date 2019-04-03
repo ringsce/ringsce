@@ -37,7 +37,9 @@ SOURCES += \
 HEADERS += \
         mainwindow.h \
     highlighter.h \
-    splashscreen.h
+    splashscreen.h \
+    ui_new_file.h \
+    ui_new_project.h
 
 FORMS += \
         mainwindow.ui \
