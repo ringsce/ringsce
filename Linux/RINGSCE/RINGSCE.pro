@@ -39,7 +39,8 @@ HEADERS += \
     highlighter.h \
     splashscreen.h \
     ui_new_file.h \
-    ui_new_project.h
+    ui_new_project.h \
+    ui_below_stack.h
 
 FORMS += \
         mainwindow.ui \

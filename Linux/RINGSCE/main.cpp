@@ -12,7 +12,7 @@
 #include "splashscreen.h"
 #include "ui_new_file.h"
 #include "ui_new_project.h"
-
+#include "ui_below_stack.h"
 //Create Wizard
 QWizardPage *createIntroPage()
 {

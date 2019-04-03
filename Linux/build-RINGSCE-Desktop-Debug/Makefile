@@ -149,7 +149,10 @@ DIST          = ../RINGSCE/RINGSCE_v2.png \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		../RINGSCE/RINGSCE.pro ../RINGSCE/mainwindow.h \
 		../RINGSCE/highlighter.h \
-		../RINGSCE/splashscreen.h ../RINGSCE/main.cpp \
+		../RINGSCE/splashscreen.h \
+		../RINGSCE/ui_new_file.h \
+		../RINGSCE/ui_new_project.h \
+		../RINGSCE/ui_below_stack.h ../RINGSCE/main.cpp \
 		../RINGSCE/mainwindow.cpp \
 		../RINGSCE/highlighter.cpp \
 		../RINGSCE/new_file.cpp \
@@ -342,7 +345,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/qdarkstyle/style.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h ../RINGSCE/splashscreen.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../RINGSCE/mainwindow.h ../RINGSCE/highlighter.h ../RINGSCE/splashscreen.h ../RINGSCE/ui_new_file.h ../RINGSCE/ui_new_project.h ../RINGSCE/ui_below_stack.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/main.cpp ../RINGSCE/mainwindow.cpp ../RINGSCE/highlighter.cpp ../RINGSCE/new_file.cpp ../RINGSCE/settings.cpp ../RINGSCE/about.cpp ../RINGSCE/update.cpp ../RINGSCE/new_project.cpp ../RINGSCE/splashscreen.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../RINGSCE/mainwindow.ui ../RINGSCE/new_file.ui ../RINGSCE/new_project.ui ../RINGSCE/below_stack.ui $(DISTDIR)/
 
@@ -468,7 +471,10 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 main.o: ../RINGSCE/main.cpp ../RINGSCE/mainwindow.h \
 		../RINGSCE/highlighter.h \
-		../RINGSCE/splashscreen.h
+		../RINGSCE/splashscreen.h \
+		../RINGSCE/ui_new_file.h \
+		../RINGSCE/ui_new_project.h \
+		../RINGSCE/ui_below_stack.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../RINGSCE/main.cpp
 
 mainwindow.o: ../RINGSCE/mainwindow.cpp ../RINGSCE/mainwindow.h \
