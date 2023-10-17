@@ -1,7 +1,6 @@
 # These are supported funding model platforms
 
 patreon: plvicente
-buymeacoffee: codermag
 open_collective: # Replace with a single Open Collective username
 ko_fi: #jackslater
 tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
@@ -10,7 +9,7 @@ liberapay: plvicente
 issuehunt: # Replace with a single IssueHunt username
 otechie: # Replace with a single Otechie username
 #custom: ['https://www.patreon.com/icculus', 'https://www.patreon.com/SmileTheory', 'https://ko-fi.com/zturtleman']
-
+custom: ['https://www.paypal.com/donate/?hosted_button_id=HGKVE6JUQD7PW']
 
 #please add your links to this if you've been a long-time contributor!
 
