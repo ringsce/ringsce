@@ -1,23 +1,24 @@
-[![Gitter](https://badges.gitter.im/plvicente-ringsce/community.svg)]
-(https://gitter.im/plvicente-ringsce/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/plvicente-ringsce/community.svg)](https://gitter.im/plvicente-ringsce/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-ringsce is an ide for big sur+ (macos 11+). It's being built on top of C++ and swiftUI. We are trying to build all the projects with cmake.
-We hope to deliver ringsce to all users, using XCode or appcode. This is not an appcode replacement. It was there a niche. We are here to exploit it.
-Today, the ide is still in use. There is so much to do.
+RINGSCE is an open-source engine and mechanism for RPG and tabletop engines designed to work on macOS 11+ (Big Sur and newer). It is built on top of C++ and SwiftUI, with projects being developed using CMake. While RINGSCE is not intended to replace AppCode, it fills a niche in the development ecosystem and aims to cater to users' needs.
 
-Donations:
-Click on the sponsor buttons.
+Currently, the IDE is actively being developed, with ongoing improvements and features being added regularly.
 
-Contributions:
-If you want to learn swift, c++, and qt even cmake. You are in the right place. Just send me an email or try to use discord
-User: plvicente
+### Support RINGSCE Development
 
-Communities
-Discord & gitter.
+**Donations:** Click on the sponsor buttons to contribute financially.
 
-Releases: Not yet. This is a breeze version. Too much on the beginning. 
- 
+**Contributions:** If you are interested in learning Swift, C++, Qt, or CMake, RINGSCE provides a suitable platform for exploration and learning. Feel free to reach out via email or join the Discord community.
+
+### Community Channels
+
+- Discord
+- Gitter
+
+### Releases
+
+As of now, there have been no official releases. RINGSCE is still in its early stages of development, with much work ahead.
+
 ![Screenshot](RINGSCE_v2.png)
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](pdvicente@gleentech.com)
-
+[![PayPal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](pdvicente@gleentech.com)
