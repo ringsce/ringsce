@@ -7,3 +7,9 @@
 [submodule "ekron-realms"]
 	path = ekron-realms
 	url = https://github.com/ringsce/ekron-realms.git
+[submodule "west"]
+	path = west
+	url = https://github.com/ringsce/west.git
+[submodule "ringsce-editor"]
+	path = ringsce-editor
+	url = https://github.com/ringsce/ringsce-editor.git
