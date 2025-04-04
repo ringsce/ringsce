@@ -45,8 +45,35 @@ ifneq ($(strip $(IS_LINUX_ARM64)),)
 	@echo " Building on Linux ARM64"
 endif
 
+# Submodules
+SUBMODULES = ekron-realms
+
+git-update:
+	@echo "🔄 Updating Git Submodules..."
+	@if [ -f .gitmodules ]; then \
+		if git config --file .gitmodules --get-regexp '^submodule\..*\.url' > /dev/null 2>&1; then \
+			git submodule update --init --recursive || echo "⚠️  Some submodules could not be updated. Skipping..."; \
+		else \
+			echo "⚠️  No valid submodule URLs found in .gitmodules. Skipping submodule update."; \
+		fi \
+	else \
+		echo "⚠️  No .gitmodules file found. Skipping submodule update."; \
+	fi
+
+	@for dir in $(SUBMODULES); do \
+		if [ -d "$$dir/.git" ]; then \
+			echo "🔁 Updating $$dir..."; \
+			cd $$dir; \
+			git checkout main || echo "⚠️  $$dir: 'main' branch not found"; \
+			git pull origin main || echo "⚠️  $$dir: pull failed"; \
+			cd - > /dev/null; \
+		fi \
+	done
+
+
+
 # Clone or update all repositories
-git-update: git-update-1 git-update-2 git-update-3 git-update-4
+#git-update: git-update-1 git-update-2 git-update-3 git-update-4
 
 git-update-1:
 	@if [ -d "$(REPO_1_DIR)" ]; then \

@@ -13,3 +13,5 @@
 [submodule "ringsce-editor"]
 	path = ringsce-editor
 	url = https://github.com/ringsce/ringsce-editor.git
+[submodule "morpheus/gtk/webui/cpp-httplib"]
+	url = https://github.com/yhirose/cpp-httplib.git
