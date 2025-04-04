@@ -1,3 +1,11 @@
+# Detect platform
+UNAME_S := $(shell uname -s)
+UNAME_M := $(shell uname -m)
+
+# Platform flags
+IS_MACOS_SILICON := $(filter arm64,$(UNAME_M))
+IS_LINUX_ARM64   := $(and $(filter Linux,$(UNAME_S)),$(filter aarch64 arm64,$(UNAME_M)))
+
 # Makefile for downloading multiple repos and building Kayte Lang projects
 
 # Repositories
@@ -26,6 +34,16 @@ FPC = fpc
 
 # All target
 all: git-update build
+
+platform-info:
+	@echo "Detected OS: $(UNAME_S)"
+	@echo "Detected ARCH: $(UNAME_M)"
+ifneq ($(strip $(IS_MACOS_SILICON)),)
+	@echo "  Building on macOS Silicon (arm64)"
+endif
+ifneq ($(strip $(IS_LINUX_ARM64)),)
+	@echo " Building on Linux ARM64"
+endif
 
 # Clone or update all repositories
 git-update: git-update-1 git-update-2 git-update-3 git-update-4
@@ -94,7 +112,7 @@ build-4:
 # Clean up build files
 clean:
 	@echo "Cleaning..."
-	find $(REPO_1_DIR) $(REPO_2_DIR) $(REPO_3_DIR) (REPO_4_DIR) -name "*.o" -o -name "*.ppu" -delete
+	find $(REPO_1_DIR) $(REPO_2_DIR) $(REPO_3_DIR) $(REPO_4_DIR) -name "*.o" -o -name "*.ppu" -delete
 	rm -f $(BIN_1) $(BIN_2)
 
 .PHONY: all git-update git-update-1 git-update-2 git-update-3 git-update-4 build build-1 build-2 build-3 build-4 clean
