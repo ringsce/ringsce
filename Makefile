@@ -9,7 +9,7 @@ IS_LINUX_ARM64   := $(and $(filter Linux,$(UNAME_S)),$(filter aarch64 arm64,$(UN
 # Makefile for downloading multiple repos and building Kayte Lang projects
 
 # Repositories
-REPO_1_URL = https://github.com/ringsce/kayte-lang.git
+#REPO_1_URL = https://github.com/ringsce/kayte-lang.git
 REPO_2_URL = https://github.com/ringsce/ekron-realms.git
 REPO_3_URL = https://github.com/ringsce/kayte-vscode.git
 REPO_4_URL = https://github.com/ringsce/tilde-desktop.git
@@ -29,6 +29,34 @@ MAIN_2_SRC = $(REPO_2_DIR)/tools/toolkit.lpr
 BIN_1 = $(REPO_1_DIR)/projects/kayte
 BIN_2 = $(REPO_2_DIR)/tools/toolkit
 
+
+# Define repo and directory
+KAYTE_REPO_URL = https://github.com/ringsce/kayte-lang.git
+KAYTE_REPO_DIR = kayte-lang
+
+REPO_EKRON_URL = https://github.com/ringsce/ekron-realms.git
+REPO_EKRON_DIR = ekron-realms
+
+
+# Clone ekron realms if it doesn't exist
+clone-ekron:
+	@if [ ! -d "$(REPO_EKRON_DIR)" ]; then \
+		echo "🚀 Cloning Ekron..."; \
+		git clone $(REPO_EKRON_URL) $(REPO_EKRON_DIR); \
+	else \
+		echo "✅ Ekron Realms already cloned."; \
+	fi
+
+
+# Clone kayte-lang if it doesn't exist
+clone-kayte-lang:
+	@if [ ! -d "$(KAYTE_REPO_DIR)" ]; then \
+		echo "🚀 Cloning Kayte Lang..."; \
+		git clone $(KAYTE_REPO_URL) $(KAYTE_REPO_DIR); \
+	else \
+		echo "✅ Kayte Lang already cloned."; \
+	fi
+
 # Compiler
 FPC = fpc
 
@@ -46,7 +74,7 @@ ifneq ($(strip $(IS_LINUX_ARM64)),)
 endif
 
 # Submodules
-SUBMODULES = ekron-realms
+SUBMODULES = ekron-realms morpheus realms-rpi ringsce-editor
 
 git-update:
 	@echo "🔄 Updating Git Submodules..."
@@ -54,7 +82,7 @@ git-update:
 		if git config --file .gitmodules --get-regexp '^submodule\..*\.url' > /dev/null 2>&1; then \
 			git submodule update --init --recursive || echo "⚠️  Some submodules could not be updated. Skipping..."; \
 		else \
-			echo "⚠️  No valid submodule URLs found in .gitmodules. Skipping submodule update."; \
+			echo "⚠️  No valid submodule URLs found in .gitmodules. Skipping suamkebmodule update."; \
 		fi \
 	else \
 		echo "⚠️  No .gitmodules file found. Skipping submodule update."; \
