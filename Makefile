@@ -6,14 +6,6 @@ UNAME_M := $(shell uname -m)
 IS_MACOS_SILICON := $(filter arm64,$(UNAME_M))
 IS_LINUX_ARM64   := $(and $(filter Linux,$(UNAME_S)),$(filter aarch64 arm64,$(UNAME_M)))
 
-# Makefile for downloading multiple repos and building Kayte Lang projects
-
-# Repositories
-#REPO_1_URL = https://github.com/ringsce/kayte-lang.git
-REPO_2_URL = https://github.com/ringsce/ekron-realms.git
-REPO_3_URL = https://github.com/ringsce/kayte-vscode.git
-REPO_4_URL = https://github.com/ringsce/tilde-desktop.git
-REPO_5_URL = https://github.com/ringsce/ringsce.git
 
 # Local clone directories
 REPO_1_DIR = kayte-lang
@@ -38,6 +30,9 @@ REPO_EKRON_URL = https://github.com/ringsce/ekron-realms.git
 REPO_EKRON_DIR = ekron-realms
 
 
+REPO_TILDE_URL = https://github.com/ringsce/tilde-desktop.git
+REPO_TILDE_DIR = tilde-desktop
+
 # Clone ekron realms if it doesn't exist
 clone-ekron:
 	@if [ ! -d "$(REPO_EKRON_DIR)" ]; then \
@@ -56,6 +51,17 @@ clone-kayte-lang:
 	else \
 		echo "✅ Kayte Lang already cloned."; \
 	fi
+
+
+# Clone kayte-lang if it doesn't exist
+clone-tilde:
+	@if [ ! -d "$(REPO_TILDE_DIR)" ]; then \
+		echo "🚀 Cloning tilde desktop..."; \
+		git clone $(REPO_TILDE_URL) $(REPO_TILDE_DIR); \
+	else \
+		echo "✅ tilde desktop already cloned."; \
+	fi
+
 
 # Compiler
 FPC = fpc
