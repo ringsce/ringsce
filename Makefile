@@ -70,7 +70,7 @@ git-update-4:
 git-update-5:
 	@if [ -d "$(REPO_5_DIR)" ]; then \
 		echo "Updating $(REPO_5_DIR)..."; \
-		cd $(REPO_4_DIR) && git pull; \
+		cd $(REPO_5_DIR) && git pull; \
 	else \
 		echo "Cloning $(REPO_5_DIR)..."; \
 		git clone --recurse-submodules $(REPO_5_URL) $(REPO_5_DIR); \
