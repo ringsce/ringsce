@@ -86,10 +86,10 @@ build-2:
 	$(FPC) -MObjFPC -Sh $(MAIN_2_SRC)
 
 build-3:
-	$(FPC) -MObjFPC -Sh $(MAIN_2_SRC)
+	$(FPC) -MObjFPC -Sh $(MAIN_3_SRC)
 
 build-4:
-	$(FPC) -MObjFPC -Sh $(MAIN_2_SRC)
+	$(FPC) -MObjFPC -Sh $(MAIN_4_SRC)
 
 # Clean up build files
 clean:
