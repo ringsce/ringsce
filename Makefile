@@ -113,7 +113,7 @@ build-4:
 clean:
 	@echo "Cleaning..."
 	find $(REPO_1_DIR) $(REPO_2_DIR) $(REPO_3_DIR) $(REPO_4_DIR) -name "*.o" -o -name "*.ppu" -delete
-	rm -f $(BIN_1) $(BIN_2)
+	rm -f $(BIN_1) $(BIN_2) $(BIN_3)
 
 .PHONY: all git-update git-update-1 git-update-2 git-update-3 git-update-4 build build-1 build-2 build-3 build-4 clean
 
