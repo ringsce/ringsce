@@ -6,19 +6,12 @@ UNAME_M := $(shell uname -m)
 IS_MACOS_SILICON := $(filter arm64,$(UNAME_M))
 IS_LINUX_ARM64   := $(and $(filter Linux,$(UNAME_S)),$(filter aarch64 arm64,$(UNAME_M)))
 
-
-# Local clone directories
-REPO_1_DIR = kayte-lang
-REPO_2_DIR = ekron-realms
-REPO_3_DIR = kayte-vscode
-REPO_4_DIR = tilde-desktop
-
-# Entry point source files to compile
-MAIN_1_SRC = $(REPO_1_DIR)/projects/kayte.lpr
+#Entry point source files to compile
+MAIN_1_SRC = $(KAYTE_REPO_DIR)/projects/kayte.lpr
 MAIN_2_SRC = $(REPO_2_DIR)/tools/toolkit.lpr
 
 # Output binaries
-BIN_1 = $(REPO_1_DIR)/projects/kayte
+BIN_1 = $(KAYTE_REPO_DIR)/projects/kayte
 BIN_2 = $(REPO_2_DIR)/tools/toolkit
 
 
@@ -32,6 +25,33 @@ REPO_EKRON_DIR = ekron-realms
 
 REPO_TILDE_URL = https://github.com/ringsce/tilde-desktop.git
 REPO_TILDE_DIR = tilde-desktop
+
+
+# LLVM flags
+LLVM_CFLAGS := -O2 -flto
+LLVM_LD_FLAGS :=
+
+ifeq ($(IS_MACOS_SILICON),arm64)
+	LLVM_CC := clang
+	LLVM_CXX := clang++
+	LLVM_LD_FLAGS := -framework CoreFoundation
+	LLVM_ENABLED := 1
+endif
+
+ifeq ($(IS_LINUX_ARM64),arm64)
+	LLVM_CC := clang
+	LLVM_CXX := clang++
+	LLVM_ENABLED := 1
+endif
+
+# Show LLVM info
+llvm-info:
+ifeq ($(LLVM_ENABLED),1)
+	@echo "🧠 LLVM is enabled!"
+	@echo "🔧 Compiler: $(LLVM_CC)"
+else
+	@echo "🚫 LLVM not enabled on this platform."
+endif
 
 # Clone ekron realms if it doesn't exist
 clone-ekron:
@@ -67,7 +87,7 @@ clone-tilde:
 FPC = fpc
 
 # All target
-all: git-update build
+all: git-update llvm-info build
 
 platform-info:
 	@echo "Detected OS: $(UNAME_S)"
@@ -80,7 +100,7 @@ ifneq ($(strip $(IS_LINUX_ARM64)),)
 endif
 
 # Submodules
-SUBMODULES = ekron-realms morpheus realms-rpi ringsce-editor
+SUBMODULES = ekron-realms realms-rpi ringsce-editor
 
 git-update:
 	@echo "🔄 Updating Git Submodules..."
@@ -156,7 +176,7 @@ git-update-5:
 	fi
 
 # Build all main .lpr files
-build: build-1 build-2 build-3 build-4 build-5
+build: build-1 build-2 build-3 build-4 build-5 kayte-lang ekron-realms realms-rpi ringsce-editor
 
 build-1:
 	$(FPC) -MObjFPC -Sh $(MAIN_1_SRC)
@@ -176,5 +196,5 @@ clean:
 	find $(REPO_1_DIR) $(REPO_2_DIR) $(REPO_3_DIR) $(REPO_4_DIR) -name "*.o" -o -name "*.ppu" -delete
 	rm -f $(BIN_1) $(BIN_2) $(BIN_3)
 
-.PHONY: all git-update git-update-1 git-update-2 git-update-3 git-update-4 build build-1 build-2 build-3 build-4 clean
+.PHONY: all git-update git-update-1 git-update-2 git-update-3 git-update-4 build build-1 build-2 build-3 build-4 llvm-info clean
 
