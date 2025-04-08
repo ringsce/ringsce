@@ -44,7 +44,7 @@ Refer to the `docs` folder for additional information:
 ## Community and Support
 
 Join our community to discuss new features, share insights, and contribute to ringsCE’s development:
-- **Community Website**: [community.ringsce.com](https://ringscejs.gleentech.com)
+- **Community Website**: [ringscejs.gleentech.com](https://ringscejs.gleentech.com)
 - **Support Email**: pdvicente@gleentech.com
 
 ---
