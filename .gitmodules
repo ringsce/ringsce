@@ -10,4 +10,7 @@
 [submodule "ringsce-editor"]
 	path = ringsce-editor
 	url = https://github.com/ringsce/ringsce-editor.git
+[submodule "kaye-lang"]
+	path = kayte-lang
+	url = https://github.com/ringsce/kayte-lang.git
 
