@@ -6,7 +6,7 @@ UNAME_M := $(shell uname -m)
 IS_MACOS_SILICON := $(filter arm64,$(UNAME_M))
 IS_LINUX_ARM64   := $(and $(filter Linux,$(UNAME_S)),$(filter aarch64 arm64,$(UNAME_M)))
 
-#Entry point source files to compile
+# Entry point source files
 MAIN_1_SRC = $(KAYTE_REPO_DIR)/projects/kayte.lpr
 MAIN_2_SRC = $(REPO_2_DIR)/tools/toolkit.lpr
 
@@ -14,18 +14,15 @@ MAIN_2_SRC = $(REPO_2_DIR)/tools/toolkit.lpr
 BIN_1 = $(KAYTE_REPO_DIR)/projects/kayte
 BIN_2 = $(REPO_2_DIR)/tools/toolkit
 
-
-# Define repo and directory
+# Repo definitions
 KAYTE_REPO_URL = https://github.com/ringsce/kayte-lang.git
 KAYTE_REPO_DIR = kayte-lang
 
 REPO_EKRON_URL = https://github.com/ringsce/ekron-realms.git
 REPO_EKRON_DIR = ekron-realms
 
-
 REPO_TILDE_URL = https://github.com/ringsce/tilde-desktop.git
 REPO_TILDE_DIR = tilde-desktop
-
 
 # LLVM flags
 LLVM_CFLAGS := -O2 -flto
@@ -44,7 +41,7 @@ ifeq ($(IS_LINUX_ARM64),arm64)
 	LLVM_ENABLED := 1
 endif
 
-# Show LLVM info
+# LLVM info
 llvm-info:
 ifeq ($(LLVM_ENABLED),1)
 	@echo "🧠 LLVM is enabled!"
@@ -53,148 +50,106 @@ else
 	@echo "🚫 LLVM not enabled on this platform."
 endif
 
-# Clone ekron realms if it doesn't exist
-clone-ekron:
-	@if [ ! -d "$(REPO_EKRON_DIR)" ]; then \
-		echo "🚀 Cloning Ekron..."; \
-		git clone $(REPO_EKRON_URL) $(REPO_EKRON_DIR); \
-	else \
-		echo "✅ Ekron Realms already cloned."; \
-	fi
-
-
-# Clone kayte-lang if it doesn't exist
-clone-kayte-lang:
-	@if [ ! -d "$(KAYTE_REPO_DIR)" ]; then \
-		echo "🚀 Cloning Kayte Lang..."; \
-		git clone $(KAYTE_REPO_URL) $(KAYTE_REPO_DIR); \
-	else \
-		echo "✅ Kayte Lang already cloned."; \
-	fi
-
-
-# Clone kayte-lang if it doesn't exist
-clone-tilde:
-	@if [ ! -d "$(REPO_TILDE_DIR)" ]; then \
-		echo "🚀 Cloning tilde desktop..."; \
-		git clone $(REPO_TILDE_URL) $(REPO_TILDE_DIR); \
-	else \
-		echo "✅ tilde desktop already cloned."; \
-	fi
-
-
-# Compiler
-FPC = fpc
-
-# All target
-all: git-update llvm-info build
-
+# Platform info
 platform-info:
 	@echo "Detected OS: $(UNAME_S)"
 	@echo "Detected ARCH: $(UNAME_M)"
 ifneq ($(strip $(IS_MACOS_SILICON)),)
-	@echo "  Building on macOS Silicon (arm64)"
+	@echo "  ✅ macOS Silicon (arm64) detected"
 endif
 ifneq ($(strip $(IS_LINUX_ARM64)),)
-	@echo " Building on Linux ARM64"
+	@echo "  ✅ Linux ARM64 detected"
 endif
 
+# Compiler
+LAZBUILD_PATH ?= $(HOME)/fpcupdeluxe/lazarus/lazbuild
+LAZBUILD = $(LAZBUILD_PATH)
+FPC = $(LAZBUILD_PATH)
+
 # Submodules
-SUBMODULES = ekron-realms realms-rpi ringsce-editor
+SUBMODULES = \
+  tilde-desktop \
+  ekron-realms \
+  realms-rpi \
+  ringsce-editor \
+  morpheus \
+  morpheus/gtk/webui/cpp-httplib
 
-git-update:
-	@echo "🔄 Updating Git Submodules..."
-	@if [ -f .gitmodules ]; then \
-		if git config --file .gitmodules --get-regexp '^submodule\..*\.url' > /dev/null 2>&1; then \
-			git submodule update --init --recursive || echo "⚠️  Some submodules could not be updated. Skipping..."; \
+clone-submodules:
+	@echo "🔁 Cloning submodules..."
+	@for sub in $(SUBMODULES); do \
+		if [ ! -d "$$sub/.git" ]; then \
+			echo "➡️  Cloning $$sub..."; \
+			git submodule update --init --recursive $$sub || echo "❌ Failed: $$sub"; \
 		else \
-			echo "⚠️  No valid submodule URLs found in .gitmodules. Skipping suamkebmodule update."; \
+			echo "✅ $$sub already exists."; \
 		fi \
-	else \
-		echo "⚠️  No .gitmodules file found. Skipping submodule update."; \
-	fi
+	done
 
+git-update: clone-submodules
+	@echo "🔄 Updating Git Submodules..."
+	@git submodule update --init --recursive || echo "⚠️  Some submodules could not be updated."
 	@for dir in $(SUBMODULES); do \
 		if [ -d "$$dir/.git" ]; then \
 			echo "🔁 Updating $$dir..."; \
-			cd $$dir; \
-			git checkout main || echo "⚠️  $$dir: 'main' branch not found"; \
-			git pull origin main || echo "⚠️  $$dir: pull failed"; \
+			cd $$dir && git checkout main && git pull origin main || echo "⚠️  $$dir pull failed"; \
 			cd - > /dev/null; \
 		fi \
 	done
 
+# Clone targets
+clone-ekron:
+	@if [ ! -d "$(REPO_EKRON_DIR)" ]; then git clone $(REPO_EKRON_URL); fi
+clone-tilde:
+	@if [ ! -d "$(REPO_TILDE_DIR)" ]; then git clone $(REPO_TILDE_URL); fi
+clone-kayte-lang:
+	@if [ ! -d "$(KAYTE_REPO_DIR)" ]; then git clone $(KAYTE_REPO_URL); fi
 
+# Build rules
+build-kayte-lang:
+	@echo "🔧 Building kayte-lang..."
+	@chmod +x kayte-lang/projects/kayte.lpr
+	@$(LAZBUILD) kayte-lang/projects/kayte.lpi || echo "❌ Failed to build kayte-lang"
 
-# Clone or update all repositories
-#git-update: git-update-1 git-update-2 git-update-3 git-update-4
-
-git-update-1:
-	@if [ -d "$(REPO_1_DIR)" ]; then \
-		echo "Updating $(REPO_1_DIR)..."; \
-		cd $(REPO_1_DIR) && git pull; \
+build-tilde-desktop:
+	@echo "🔧 Building tilde-desktop..."
+	@if [ -f tilde-desktop/project.lpi ]; then \
+		$(LAZBUILD) tilde-desktop/project.lpi; \
 	else \
-		echo "Cloning $(REPO_1_DIR)..."; \
-		git clone $(REPO_1_URL) $(REPO_1_DIR); \
+		echo "⚠️  No project.lpi in tilde-desktop"; \
 	fi
 
-git-update-2:
-	@if [ -d "$(REPO_2_DIR)" ]; then \
-		echo "Updating $(REPO_2_DIR)..."; \
-		cd $(REPO_2_DIR) && git pull; \
+build-ekron-realms:
+	@echo "🔧 Building ekron-realms..."
+	@if [ -f ekron-realms/project.lpi ]; then \
+		$(LAZBUILD) ekron-realms/project.lpi; \
 	else \
-		echo "Cloning $(REPO_2_DIR)..."; \
-		git clone $(REPO_2_URL) $(REPO_2_DIR); \
+		echo "⚠️  No project.lpi in ekron-realms"; \
 	fi
 
-git-update-3:
-	@if [ -d "$(REPO_3_DIR)" ]; then \
-		echo "Updating $(REPO_3_DIR)..."; \
-		cd $(REPO_3_DIR) && git pull; \
+build-realms-rpi:
+	@echo "🔧 Building realms-rpi..."
+	@if [ -f realms-rpi/project.lpi ]; then \
+		$(LAZBUILD) realms-rpi/project.lpi; \
 	else \
-		echo "Cloning $(REPO_3_DIR)..."; \
-		git clone $(REPO_3_URL) $(REPO_3_DIR); \
+		echo "⚠️  No project.lpi in realms-rpi"; \
 	fi
 
+build-submodules: build-kayte-lang build-realms-rpi build-tilde-desktop build-ekron-realms
+	@echo "✅ All submodules built successfully."
 
-git-update-4:
-	@if [ -d "$(REPO_4_DIR)" ]; then \
-		echo "Updating $(REPO_4_DIR)..."; \
-		cd $(REPO_4_DIR) && git pull; \
-	else \
-		echo "Cloning $(REPO_4_DIR)..."; \
-		git clone $(REPO_4_URL) $(REPO_4_DIR); \
-	fi
+# Main build entry
+build: build-submodules
 
-git-update-5:
-	@if [ -d "$(REPO_5_DIR)" ]; then \
-		echo "Updating $(REPO_5_DIR)..."; \
-		cd $(REPO_5_DIR) && git pull; \
-	else \
-		echo "Cloning $(REPO_5_DIR)..."; \
-		git clone --recurse-submodules $(REPO_5_URL) $(REPO_5_DIR); \
-	fi
-
-# Build all main .lpr files
-build: build-1 build-2 build-3 build-4 build-5 kayte-lang ekron-realms realms-rpi ringsce-editor
-
-build-1:
-	$(FPC) -MObjFPC -Sh $(MAIN_1_SRC)
-
-build-2:
-	$(FPC) -MObjFPC -Sh $(MAIN_2_SRC)
-
-build-3:
-	$(FPC) -MObjFPC -Sh $(MAIN_3_SRC)
-
-build-4:
-	$(FPC) -MObjFPC -Sh $(MAIN_4_SRC)
-
-# Clean up build files
+# Clean
 clean:
-	@echo "Cleaning..."
-	find $(REPO_1_DIR) $(REPO_2_DIR) $(REPO_3_DIR) $(REPO_4_DIR) -name "*.o" -o -name "*.ppu" -delete
-	rm -f $(BIN_1) $(BIN_2) $(BIN_3)
+	@echo "🧹 Cleaning..."
+	find . -name "*.o" -o -name "*.ppu" -delete
+	rm -f $(BIN_1) $(BIN_2)
 
-.PHONY: all git-update git-update-1 git-update-2 git-update-3 git-update-4 build build-1 build-2 build-3 build-4 llvm-info clean
+# Default
+all: platform-info git-update llvm-info build
 
+.PHONY: all git-update llvm-info build clean platform-info \
+	clone-submodules clone-tilde clone-ekron clone-kayte-lang \
+	build-submodules build-kayte-lang build-realms-rpi build-tilde-desktop build-ekron-realms
