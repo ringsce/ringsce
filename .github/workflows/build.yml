@@ -15,13 +15,18 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install Free Pascal and Dependencies
         run: |
           sudo apt update
-          sudo apt install -y fpc lazarus build-essential bison flex automake autoconf git
+          sudo apt install -y fpc lazarus build-essential bison flex automake autoconf git clang
 
-      - name: Run Makefile
+      - name: Show LLVM Info
+        run: make llvm-info
+
+      - name: Build Ringsce
         run: make all
 
       - name: Package Ringsce Binary
@@ -44,11 +49,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install Free Pascal
         run: brew install fpc lazarus
 
-      - name: Run Makefile
+      - name: Show LLVM Info
+        run: make llvm-info
+
+      - name: Build Ringsce
         run: make all
 
       - name: Package Ringsce Binary
@@ -71,13 +81,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install Free Pascal
         run: |
           sudo apt update
           sudo apt install -y fpc lazarus
 
-      - name: Build with Raspberry Pi Flags
+      - name: Build for Raspberry Pi 3
         run: make all FLAGS="-Tlinux -Parm -O2"
 
       - name: Package Ringsce Binary
@@ -100,13 +112,15 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install Free Pascal
         run: |
           sudo apt update
           sudo apt install -y fpc lazarus
 
-      - name: Build with Odroid Flags
+      - name: Build for Odroid C2
         run: make all FLAGS="-Tlinux -Paarch64 -O2"
 
       - name: Package Ringsce Binary
