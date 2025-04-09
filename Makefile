@@ -113,18 +113,18 @@ build-kayte-lang:
 
 build-tilde-desktop:
 	@echo "🔧 Building tilde-desktop..."
-	@if [ -f tilde-desktop/project.lpi ]; then \
-		$(LAZBUILD) tilde-desktop/project.lpi; \
+	@if [ -f tilde-desktop/ctm-interpreter/ctminterpreter.lpi ]; then \
+		$(LAZBUILD) tilde-desktop/ctm-interpreter/ctminterpreter.lpi ; \
 	else \
-		echo "⚠️  No project.lpi in tilde-desktop"; \
+		echo "⚠️  No ctminterpreter.lpi in tilde-desktop"; \
 	fi
 
 build-ekron-realms:
 	@echo "🔧 Building ekron-realms..."
-	@if [ -f ekron-realms/project.lpi ]; then \
-		$(LAZBUILD) ekron-realms/project.lpi; \
+	@if [ -f ekron-realms/Projects/realms.lpi ]; then \
+		$(LAZBUILD) ekron-realms/Projects/realms.lpi; \
 	else \
-		echo "⚠️  No project.lpi in ekron-realms"; \
+		echo "⚠️  No realms.lpi in ekron-realms"; \
 	fi
 
 build-realms-rpi:
@@ -135,17 +135,55 @@ build-realms-rpi:
 		echo "⚠️  No project.lpi in realms-rpi"; \
 	fi
 
+
+
 build-submodules: build-kayte-lang build-realms-rpi build-tilde-desktop build-ekron-realms
 	@echo "✅ All submodules built successfully."
 
+# Archive output directory
+RELEASE_DIR = release
+
+# Archive target
+package:
+	@echo "📦 Packaging built binaries into tar.gz..."
+	@mkdir -p $(RELEASE_DIR)/linux-arm64
+	@mkdir -p $(RELEASE_DIR)/macos-arm64
+	@mkdir -p $(RELEASE_DIR)/rpi3
+	@mkdir -p $(RELEASE_DIR)/odroid-c2
+
+	@if [ -f kayte-lang/projects/kayte ]; then cp kayte-lang/projects/kayte $(RELEASE_DIR)/linux-arm64/; fi
+	@if [ -f ekron-realms/Projects/realms ]; then cp ekron-realms/Projects/realms $(RELEASE_DIR)/linux-arm64/; fi
+	@tar -czvf ringsce-linux-arm64.tar.gz -C $(RELEASE_DIR)/linux-arm64 .
+
+	@if [ -f kayte-lang/projects/kayte ]; then cp kayte-lang/projects/kayte $(RELEASE_DIR)/macos-arm64/; fi
+	@if [ -f ekron-realms/Projects/realms ]; then cp ekron-realms/Projects/realms $(RELEASE_DIR)/macos-arm64/; fi
+	@tar -czvf ringsce-macos-arm64.tar.gz -C $(RELEASE_DIR)/macos-arm64 .
+
+	@if [ -f kayte-lang/projects/kayte ]; then cp kayte-lang/projects/kayte $(RELEASE_DIR)/rpi3/; fi
+	@if [ -f ekron-realms/Projects/realms ]; then cp ekron-realms/Projects/realms $(RELEASE_DIR)/rpi3/; fi
+	@tar -czvf ringsce-rpi3.tar.gz -C $(RELEASE_DIR)/rpi3 .
+
+	@if [ -f kayte-lang/projects/kayte ]; then cp kayte-lang/projects/kayte $(RELEASE_DIR)/odroid-c2/; fi
+	@if [ -f ekron-realms/Projects/realms ]; then cp ekron-realms/Projects/realms $(RELEASE_DIR)/odroid-c2/; fi
+	@tar -czvf ringsce-odroid-c2.tar.gz -C $(RELEASE_DIR)/odroid-c2 .
+
+	@echo "✅ Packages created: ringsce-*.tar.gz"
+
+
 # Main build entry
-build: build-submodules
+build: build-submodules kayte-lang ekron-realms realms-rpi ringsce-editor package
 
 # Clean
 clean:
-	@echo "🧹 Cleaning..."
-	find . -name "*.o" -o -name "*.ppu" -delete
-	rm -f $(BIN_1) $(BIN_2)
+	@echo "🧹 Cleaning build artifacts..."
+	@find . \( -name "*.o" -o -name "*.ppu" -o -name "*.compiled" -o -name "*.rst" -o -name "*.bak" \) -type f -delete
+	@rm -f kayte-lang/projects/kayte
+	@rm -f ekron-realms/tools/toolkit
+	@rm -f ekron-realms/Projects/realms
+	@rm -rf release
+	@rm -f ringsce-*.tar.gz
+	@echo "✅ Cleanup complete."
+
 
 # Default
 all: platform-info git-update llvm-info build
